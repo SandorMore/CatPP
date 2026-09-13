@@ -29,7 +29,7 @@ bool search_directory(const std::string& target, const fs::path& start_dir = fs:
     {
         if(entry.is_regular_file() && entry.path().filename() == target)
         {
-            print_contents(target);
+            print_contents(entry.path().string());
             return true;
         }
     }
@@ -38,11 +38,15 @@ bool search_directory(const std::string& target, const fs::path& start_dir = fs:
 
 int main(int argc, char** argv)
 {
+    if(argc == 1)
+    {
+        return 1;
+    }
     int arguements_inline = argc - 1;
     
-    if(arguements_inline > 2)
+    if(arguements_inline > 3)
     {
-        std::cerr << "Too many arguements." << "\n for help try -h as a single arguement!";
+        std::cerr << "Too many arguements." << "\nFor help try -h as a single arguement!";
         return 1;
     }
     
