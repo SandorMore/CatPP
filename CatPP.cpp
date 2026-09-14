@@ -15,12 +15,15 @@ bool compare_string_literals(std::string_view s1, std::string_view s2)
 void print_contents(const std::string& target)
 {
     std::string content;
+    std::string line;
     std::ifstream ifs(target);
 
-    while(std::getline(ifs, content))
+    while(std::getline(ifs, line))
     {
-        std::cout << content;
+        content.append(line);
+        content.append("\n");
     }
+    std::cout << content << "\n"; 
 }
 
 bool search_directory(const std::string& target, const fs::path& start_dir = fs::current_path())
